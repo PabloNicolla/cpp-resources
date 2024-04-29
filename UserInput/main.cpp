@@ -5,12 +5,10 @@
 #include <doctest/doctest.h>
 #endif
 
-#include "Trim.h"
-#include "GetInput.h"
-
 #if RUN_TESTS != 1
 
-int main() {
+int main()
+{
   return 0;
 }
 

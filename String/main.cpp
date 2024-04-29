@@ -5,13 +5,11 @@
 #include <doctest/doctest.h>
 #endif
 
-#include "date.h"
-
 #if RUN_TESTS != 1
 
-// Example usage
 int main()
 {
+    return 0;
 }
 
 #endif

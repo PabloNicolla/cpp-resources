@@ -1,0 +1,11 @@
+ID,Name,Age,Occupation,Salary,Department,JoinDate
+1,John Doe,30,Software Engineer,90000,Engineering,2018-06-12
+2,Jane Smith,25,Data Analyst,75000,Data Science,2019-08-05
+3,Emily Davis,40,Project Manager,110000,Management,2015-04-22
+4,Michael Brown,35,Designer,67000,Design,2017-03-18
+5,Sarah Wilson,29,Quality Assurance,85000,Engineering,2020-11-01
+6,James Johnson,45,Senior Developer,120000,Engineering,2014-05-15
+7,Patricia Taylor,32,Marketing Specialist,65000,Marketing,2021-01-09
+8,Robert Anderson,50,Chief Financial Officer,150000,Finance,2010-09-20
+9,Linda Martinez,28,Human Resources,70000,HR,2022-07-16
+10,David Thomas,38,Security,80000,Security,2016-12-05
