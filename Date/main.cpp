@@ -1,4 +1,13 @@
+#include "run_tests.h"
+
+#if RUN_TESTS == 1
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
+#include <doctest/doctest.h>
+#endif
+
 #include "date.h"
+
+#if RUN_TESTS != 1
 
 // Example usage
 int main()
@@ -21,3 +30,5 @@ int main()
     std::cout << "Converted time_point to string: " << time_point_to_string(date_tp) << '\n';
     return 0;
 }
+
+#endif
