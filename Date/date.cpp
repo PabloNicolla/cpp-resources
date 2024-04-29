@@ -6,6 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <ctime>
+#include "date.h"
 
 // Make a tm structure representing a date
 std::tm make_tm(int year, int month, int day)
@@ -18,7 +19,7 @@ std::tm make_tm(int year, int month, int day)
 }
 
 // check if leap year
-bool isLeapYear(int year)
+bool is_leap_year(int year)
 {
     if (year % 4 != 0)
     {
@@ -45,7 +46,7 @@ std::tm string_to_tm(const std::string &date_str)
     std::tm tm = {};
     std::istringstream ss(date_str);
     ss >> std::get_time(&tm, "%d/%m/%Y");
-    if (!isLeapYear(tm.tm_year + 1900) || tm.tm_mon != 1)
+    if (!is_leap_year(tm.tm_year + 1900) || tm.tm_mon != 1)
     {
         if (monthDay[tm.tm_mon] < tm.tm_mday)
         {
@@ -88,7 +89,7 @@ std::string time_point_to_string(const std::chrono::system_clock::time_point &ti
 }
 
 // Get days between two strings
-double daysBetween(const std::string &date1, const std::string &date2)
+double days_between(const std::string &date1, const std::string &date2)
 {
     // Structures representing the two dates
     std::tm tm1 = string_to_tm(date1);
@@ -103,4 +104,48 @@ double daysBetween(const std::string &date1, const std::string &date2)
 
     // To be fully portable, use difftime to get the difference in seconds:
     return std::difftime(time1, time2) / seconds_per_day;
+}
+
+int years_between(const std::string &date1, const std::string &date2)
+{
+    int yearsBetween{};
+    auto d1_tm = string_to_tm(date1);
+    auto d2_tm = string_to_tm(date2);
+    auto daysBetween = days_between(date1, date2);
+
+    if (static_cast<int>(daysBetween) == 0)
+    {
+        yearsBetween = 0;
+    }
+    else if (daysBetween < 0)
+    {
+        tm temp = d1_tm;
+        d1_tm = d2_tm;
+        d2_tm = temp;
+    }
+
+    int currYear = d1_tm.tm_year + 1900;
+    if (is_leap_year(currYear) && (d1_tm.tm_mon > 1 || (d1_tm.tm_mon == 1 && d1_tm.tm_mday == 29)))
+    {
+        --daysBetween;
+    }
+    --currYear;
+    for (int i{d1_tm.tm_year - d2_tm.tm_year}; i > 0; --i)
+    {
+        if (is_leap_year(currYear))
+        {
+            if (i != 1)
+            {
+                --daysBetween;
+            }
+            else if (d2_tm.tm_mon <= 1)
+            {
+                --daysBetween;
+            }
+        }
+        --currYear;
+    }
+    yearsBetween = static_cast<int>(daysBetween / 365);
+
+    return yearsBetween;
 }
