@@ -8,10 +8,12 @@
 #if RUN_TESTS != 1
 
 #include "readFile_multithread.h"
+#include "mutexExample.h"
 
 int main()
 {
   processFile();
+  testMutex();
 }
 
 #endif
