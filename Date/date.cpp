@@ -85,7 +85,11 @@ std::tm time_point_to_tm(const std::chrono::system_clock::time_point &time)
 {
     std::time_t time_t = std::chrono::system_clock::to_time_t(time);
     std::tm tm;
+#ifdef _WIN32
     localtime_s(&tm, &time_t);
+#else
+    localtime_r(&time_t, &tm);
+#endif
     return tm;
 }
 
